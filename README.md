@@ -6,11 +6,11 @@ The code is currently functional as a basic group management tool for "Regular" 
 You can search for a group name in whole or in part.
 You can remove users from the group.
 You can add users to the group.
-This WILL break if your results return 1000 users or groups, since I have not yet implemented pagination. 
+This <strong>WILL</strong> break if your results return 1000 users or groups, since I have not yet implemented pagination. 
 
 
 
-How to Add an InActive User to a Public Group within SF:
+<strong>How to Add an InActive User to a Public Group within SF:</strong>
 1. Copy inactive UserID
 2. Navigate to Public Groups
 3. Select Group you wish to add the inactive user to
