@@ -1,12 +1,17 @@
 <apex:page controller="GroupManagerPageController" >
+<apex:form >
+<apex:outputPanel id="main">
+
 <apex:pageBlock title="Organization User Information">
-<apex:pageBlockTable value="{!userList}" var="user">
-<apex:column value="{!user.name}"/>
-</apex:pageBlockTable>
+<apex:inputText value="{!searchString}" id="wow"/>
+<apex:commandButton value="Search Group" action="{!setGroupList}" rerender="main">
+</apex:commandButton>
 <apex:pageBlockTable value="{!groupList}" var="group">
 <apex:column value="{!group.id}"/>
 <apex:column value="{!group.name}"/>
 
 </apex:pageBlockTable>
 </apex:pageBlock>
+</apex:outputPanel>
+</apex:form>
 </apex:page>
