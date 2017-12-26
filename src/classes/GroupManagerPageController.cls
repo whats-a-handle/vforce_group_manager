@@ -1,27 +1,36 @@
 public with sharing class GroupManagerPageController {
 
-    public List<User> userList { get; private set;}
-    public List<Group> groupList { get;  private set;}
+    public String searchString {get;set;}
+    transient public List<Group> groupList {get;private set;}
+    transient public List<User> userList {get;set;}
 
-    private List<User> getUserList(){
+    private List<Group> searchGroups(){
 
+        String queryString = '%'+searchString+'%';
+
+        return new List<Group>([Select Id, Name FROM Group WHERE Type = 'Regular' AND Name LIKE: queryString ]);
+    }
+
+    public void setGroupList(){
+        searchString = '';
+        groupList = searchGroups();
+    }
+
+    public List<User> searchUsers(){
+        String queryString = '%'+searchString+'%';
 
         return new List<User>([Select Id, Name FROM User]);
     }
 
-    private List<Group> getGroupList(){
-
-        return new List<Group>([Select Id, Name FROM Group WHERE Type = 'Regular']);
+    public void setUserList(){
+        searchString ='';
+        userList = searchUsers();
     }
 
     public GroupManagerPageController(){
 
-        userList = getUserList();
-        groupList = getGroupList();
 
-    }
-
-    
+    }  
     
     
 }
