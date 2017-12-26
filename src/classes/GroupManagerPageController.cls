@@ -22,13 +22,13 @@ public with sharing class GroupManagerPageController {
         groupList = searchGroups();
     }
 
-    private List<User> searchUsers(){
+    private List<User> searchUsersInGroup(){
 
         return new List<User>([Select Id, Name FROM User WHERE Id in (Select UserOrGroupId from GroupMember WHERE GroupId =: selectedGroupId)]);
     }
 
     public void setUserList(){
-        userList = searchUsers();
+        userList = searchUsersInGroup();
     }
 
      private void refreshQueries(){
@@ -41,8 +41,6 @@ public with sharing class GroupManagerPageController {
         database.delete(memberToRemove);
         refreshQueries();
     }
-
-   
 
     public GroupManagerPageController(){
         groupList = new List<Group>();
