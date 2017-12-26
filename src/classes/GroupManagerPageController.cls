@@ -35,7 +35,7 @@ public with sharing class GroupManagerPageController {
     }
     public List<User> searchUsersNotInGroup(){
 
-        return new List<User>([Select Id, Name FROM User WHERE Id NOT in (Select UserOrGroupId FROM GroupMember WHERE GroupId =: selectedGroupId)]);
+        return new List<User>([Select Id, Name FROM User WHERE Id NOT in (Select UserOrGroupId FROM GroupMember WHERE GroupId =: selectedGroupId) AND isActive =: true]);
     }
 
     public void setNonMemberList(){
