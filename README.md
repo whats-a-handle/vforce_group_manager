@@ -16,9 +16,9 @@ This <strong>WILL</strong> break if your results return 1000 users or groups, si
 3. Select Group you wish to add the inactive user to
 4. Choose any user who is not currently in the group
 5. With the selection arrow keys, move that user into the "Selected" section on the right as if you wanted to add them to the group
-6. Right-click your user and select "Inspect" if in Chrome. If in another browser, you will want to inspect on that user element that you just moved
-7. Replace the "value" after the "U:" with the inactive UserID - please refer to the image for guidance
-8. Press enter and ensure that UserID is now set within that inspection window
+6. Right-click the user you just added to the right-hand column, and select "Inspect" if in Chrome. If in another browser, you will want to inspect on that user element that you just moved and double check against the screenshot
+7. Replace the "value" after the "U:" with the inactive UserID - please refer to the image for guidance on which specific element/value to replace
+8. Press the "enter" key and ensure that UserID is now set within that inspection window
 9. Press Save and doublecheck that the user has been added. That user may not appear on the following screen unless you choose "View All"
 
 ![alt text](https://raw.githubusercontent.com/whats-a-handle/vforce_group_manager/master/src/img/inactive_user_group_bypass.png)
