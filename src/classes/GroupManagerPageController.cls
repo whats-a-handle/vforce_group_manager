@@ -40,7 +40,6 @@ public with sharing class GroupManagerPageController {
 
     public void setNonMemberList(){
         nonMemberList = searchUsersNotInGroup();
-        system.Debug(nonMemberList);
     }
 
     public void searchUsers(){
@@ -57,6 +56,14 @@ public with sharing class GroupManagerPageController {
     public void removeFromGroup(){
         GroupMember memberToRemove = [Select UserOrGroupId FROM GroupMember WHERE UserOrGroupId =: selectedUserId];
         database.delete(memberToRemove);
+        refreshQueries();
+    }
+
+    public void addToGroup(){
+        GroupMember memberToAdd = new GroupMember();
+        memberToAdd.UserOrGroupId = selectedUserId;
+        memberToAdd.GroupId = selectedGroupId;
+        database.insert(memberToAdd);
         refreshQueries();
     }
 
