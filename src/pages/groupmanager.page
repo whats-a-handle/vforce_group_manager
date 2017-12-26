@@ -3,32 +3,36 @@
 
 
 <apex:pageBlock title="Organization User Information">
-    <apex:inputText value="{!searchString}" id="wow"/>
-    <apex:commandButton value="Search Group" action="{!setGroupList}" rerender="groupTable">
-    </apex:commandButton>
-        <apex:outputPanel id="groupTable">
-            <apex:pageBlockTable value="{!groupList}" var="group">
-                <apex:column >
-                <apex:commandButton value="Select" action="{!setUserList}" rerender="userTable">
+    <apex:outputPanel id="groupTable">
+        <apex:inputText value="{!searchString}" id="wow"/>
+        <apex:commandButton value="Search Group" action="{!setGroupList}" rerender="groupTable,memberTable,userTable">
+        </apex:commandButton>
+        <apex:pageBlockTable value="{!groupList}" var="group">
+            <apex:column >
+                <apex:commandButton value="Select" action="{!setUserList}" rerender="memberTable">
                     <apex:param name="u" value="{!group.id}" assignTo="{!selectedGroupId}"/>
                 </apex:commandButton>
-                </apex:column>
-                <apex:column value="{!group.id}"/>
-                <apex:column value="{!group.name}"/>
-            </apex:pageBlockTable>
-        </apex:outputPanel>
-
+            </apex:column>
+            <apex:column value="{!group.id}"/>
+            <apex:column value="{!group.name}"/>
+        </apex:pageBlockTable>
+    </apex:outputPanel>
 </apex:pageBlock>
 
-<apex:pageBlock title="Group Members">
-    <apex:outputPanel >
-        <apex:pageBlockTable value="{!userList}" var="user" id="userTable">
+<apex:pageBlock title="Group Members" >
+    <apex:outputPanel id="memberTable">
+        <apex:pageBlockTable value="{!userList}" var="user" >
+            <apex:column >
+                <apex:commandButton value="Remove">
+                    <apex:param name="removeParam" value="{!user.id}" />
+                </apex:commandButton>
+            </apex:column>
             <apex:column value="{!user.Name}"/>
         </apex:pageBlockTable>
     </apex:outputPanel>
 </apex:pageBlock>
 
-<apex:pageBlock title="Users to Add">
+<apex:pageBlock title="Users to Add" id="userPool">
 
 </apex:pageBlock>
 </apex:form>
