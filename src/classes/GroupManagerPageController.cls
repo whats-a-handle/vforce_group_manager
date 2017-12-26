@@ -2,13 +2,15 @@ public with sharing class GroupManagerPageController {
 
     public String searchString {get;set;}
     public List<Group> groupList {get;private set;}
-    public List<User> userList {get;private set;}
+    public List<User> memberList {get;private set;}
+    public List<User> nonMemberList{get; private set;}
     public Id selectedGroupId {get; set;}
     public Id selectedUserId {get; set;}
 
     private void resetLists(){
         groupList.clear();
-        userList.clear();
+        memberList.clear();
+        nonMemberList.clear();
     }
 
     private List<Group> searchGroups(){
@@ -24,16 +26,32 @@ public with sharing class GroupManagerPageController {
 
     private List<User> searchUsersInGroup(){
 
-        return new List<User>([Select Id, Name FROM User WHERE Id in (Select UserOrGroupId from GroupMember WHERE GroupId =: selectedGroupId)]);
+        return new List<User>([Select Id, Name FROM User WHERE Id in (Select UserOrGroupId FROM GroupMember WHERE GroupId =: selectedGroupId)]);
     }
 
-    public void setUserList(){
-        userList = searchUsersInGroup();
+    public void setMemberList(){
+        memberList = searchUsersInGroup();
+        
+    }
+    public List<User> searchUsersNotInGroup(){
+
+        return new List<User>([Select Id, Name FROM User WHERE Id NOT in (Select UserOrGroupId FROM GroupMember WHERE GroupId =: selectedGroupId)]);
     }
 
+    public void setNonMemberList(){
+        nonMemberList = searchUsersNotInGroup();
+        system.Debug(nonMemberList);
+    }
+
+    public void searchUsers(){
+        setMemberList();
+        setNonMemberList();
+
+    }
      private void refreshQueries(){
         setGroupList();
-        setUserList();
+        setMemberList();
+        setNonMemberList();
     }
 
     public void removeFromGroup(){
@@ -44,7 +62,8 @@ public with sharing class GroupManagerPageController {
 
     public GroupManagerPageController(){
         groupList = new List<Group>();
-        userList = new List<User>();
+        memberList = new List<User>();
+        nonMemberList = new List<User>();
     }  
     
     
