@@ -1,6 +1,7 @@
 # vforce_group_manager
 Making a simple group manager page for fun with visualforce and apex. I had previously run into issues when I needed to add some deactivated users to a group for custom reporting in a vforce page with an apex controller. Apparently, SF doesn't want you adding Deactivated users to groups through the GUI in Setup. You can get around this by opening your browser inspector and changing the selected user IDs within the multi-picklist (tutorial below), but this is not intuitive if you have many inactive users to add. SF doesn't appear to have server-side validation on the Edit Group page to prevent deactivated users from being added to a group - only client-side validation which can be bypassed. This is just going to be a fun proof of concept to get around having to use the Inspection tool. It appears that it cannot be bypassed with Apex through DML/GroupMember insertions, but the following screenshot will show you how to get around it.
 
+You <strong>CANNOT</strong> yet bypass the validation using this visualforce page/apex, but <strong>you CAN bypass it with the following guide at the bottom.</strong>
 The code is currently functional as a basic group management tool for "Regular" type Public Groups.
 You can search for a group name in whole or in part.
 You can remove users from the group.
