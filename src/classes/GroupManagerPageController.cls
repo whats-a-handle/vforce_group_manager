@@ -4,6 +4,7 @@ public with sharing class GroupManagerPageController {
     public List<Group> groupList {get;private set;}
     public List<User> userList {get;private set;}
     public Id selectedGroupId {get; set;}
+    public Id selectedUserId {get; set;}
 
     private void resetLists(){
         groupList.clear();
@@ -30,11 +31,22 @@ public with sharing class GroupManagerPageController {
         userList = searchUsers();
     }
 
+     public void refreshQueries(){
+        setGroupList();
+        setUserList();
+    }
+
+    public void removeFromGroup(){
+        GroupMember memberToRemove = [Select UserOrGroupId FROM GroupMember WHERE UserOrGroupId =: selectedUserId];
+        database.delete(memberToRemove);
+        refreshQueries();
+    }
+
+   
+
     public GroupManagerPageController(){
         groupList = new List<Group>();
         userList = new List<User>();
-        
-
     }  
     
     
