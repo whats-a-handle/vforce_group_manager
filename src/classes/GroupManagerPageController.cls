@@ -22,7 +22,7 @@ public with sharing class GroupManagerPageController {
         groupList = searchGroups();
     }
 
-    public List<User> searchUsers(){
+    private List<User> searchUsers(){
 
         return new List<User>([Select Id, Name FROM User WHERE Id in (Select UserOrGroupId from GroupMember WHERE GroupId =: selectedGroupId)]);
     }
@@ -31,7 +31,7 @@ public with sharing class GroupManagerPageController {
         userList = searchUsers();
     }
 
-     public void refreshQueries(){
+     private void refreshQueries(){
         setGroupList();
         setUserList();
     }
