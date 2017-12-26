@@ -2,19 +2,19 @@
 <apex:form >
 
 
-<apex:pageBlock title="Organization User Information">
+<apex:pageBlock title="Public Groups">
     <apex:outputPanel id="groupTable">
         <apex:inputText value="{!searchString}" id="wow"/>
         <apex:commandButton value="Search Group" action="{!setGroupList}" rerender="groupTable,memberTable,userTable">
         </apex:commandButton>
         <apex:pageBlockTable value="{!groupList}" var="group">
-            <apex:column >
+            <apex:column headerValue="Select Group" >
                 <apex:commandButton value="Select" action="{!setUserList}" rerender="memberTable">
                     <apex:param name="u" value="{!group.id}" assignTo="{!selectedGroupId}"/>
                 </apex:commandButton>
             </apex:column>
-            <apex:column value="{!group.id}"/>
             <apex:column value="{!group.name}"/>
+            <apex:column value="{!group.id}"/>
         </apex:pageBlockTable>
     </apex:outputPanel>
 </apex:pageBlock>
@@ -22,12 +22,12 @@
 <apex:pageBlock title="Group Members" >
     <apex:outputPanel id="memberTable">
         <apex:pageBlockTable value="{!userList}" var="user" >
-            <apex:column >
-                <apex:commandButton value="Remove">
-                    <apex:param name="removeParam" value="{!user.id}" />
+            <apex:column headerValue="Select Members for Removal">
+                <apex:commandButton value="Remove" action="{!removeFromGroup}" rerender="groupTable,memberTable,userTable">
+                    <apex:param name="removeParam" value="{!user.id}" assignTo="{!selectedUserId}" />
                 </apex:commandButton>
             </apex:column>
-            <apex:column value="{!user.Name}"/>
+            <apex:column value="{!user.name}"/>
         </apex:pageBlockTable>
     </apex:outputPanel>
 </apex:pageBlock>
