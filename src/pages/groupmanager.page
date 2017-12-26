@@ -1,6 +1,12 @@
-<apex:page >
-  <!-- Begin Default Content REMOVE THIS -->
-  <h1>Congratulations</h1>
-  This is your new Page: groupmanager
-  <!-- End Default Content REMOVE THIS -->
+<apex:page controller="GroupManagerPageController" >
+<apex:pageBlock title="Organization User Information">
+<apex:pageBlockTable value="{!userList}" var="user">
+<apex:column value="{!user.name}"/>
+</apex:pageBlockTable>
+<apex:pageBlockTable value="{!groupList}" var="group">
+<apex:column value="{!group.id}"/>
+<apex:column value="{!group.name}"/>
+
+</apex:pageBlockTable>
+</apex:pageBlock>
 </apex:page>
