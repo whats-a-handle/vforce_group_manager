@@ -5,8 +5,15 @@ public with sharing class GroupManagerPageController {
     public List<User> userList {get;private set;}
     public Id selectedGroupId {get; set;}
 
+    private void resetLists(){
+        groupList.clear();
+        userList.clear();
+    }
+
     private List<Group> searchGroups(){
+        resetLists();
         String queryString = '%'+searchString+'%';
+
         return new List<Group>([Select Id, Name FROM Group WHERE Type = 'Regular' AND Name LIKE: queryString ]);
     }
 
@@ -15,6 +22,7 @@ public with sharing class GroupManagerPageController {
     }
 
     public List<User> searchUsers(){
+
         return new List<User>([Select Id, Name FROM User WHERE Id in (Select UserOrGroupId from GroupMember WHERE GroupId =: selectedGroupId)]);
     }
 
@@ -23,7 +31,9 @@ public with sharing class GroupManagerPageController {
     }
 
     public GroupManagerPageController(){
-
+        groupList = new List<Group>();
+        userList = new List<User>();
+        
 
     }  
     
