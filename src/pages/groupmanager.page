@@ -1,17 +1,35 @@
 <apex:page controller="GroupManagerPageController" >
 <apex:form >
-<apex:outputPanel id="main">
+
 
 <apex:pageBlock title="Organization User Information">
-<apex:inputText value="{!searchString}" id="wow"/>
-<apex:commandButton value="Search Group" action="{!setGroupList}" rerender="main">
-</apex:commandButton>
-<apex:pageBlockTable value="{!groupList}" var="group">
-<apex:column value="{!group.id}"/>
-<apex:column value="{!group.name}"/>
+    <apex:inputText value="{!searchString}" id="wow"/>
+    <apex:commandButton value="Search Group" action="{!setGroupList}" rerender="groupTable">
+    </apex:commandButton>
+        <apex:outputPanel id="groupTable">
+            <apex:pageBlockTable value="{!groupList}" var="group">
+                <apex:column >
+                <apex:commandButton value="Select" action="{!setUserList}" rerender="userTable">
+                    <apex:param name="u" value="{!group.id}" assignTo="{!selectedGroupId}"/>
+                </apex:commandButton>
+                </apex:column>
+                <apex:column value="{!group.id}"/>
+                <apex:column value="{!group.name}"/>
+            </apex:pageBlockTable>
+        </apex:outputPanel>
 
-</apex:pageBlockTable>
 </apex:pageBlock>
-</apex:outputPanel>
+
+<apex:pageBlock title="Group Members">
+    <apex:outputPanel >
+        <apex:pageBlockTable value="{!userList}" var="user" id="userTable">
+            <apex:column value="{!user.Name}"/>
+        </apex:pageBlockTable>
+    </apex:outputPanel>
+</apex:pageBlock>
+
+<apex:pageBlock title="Users to Add">
+
+</apex:pageBlock>
 </apex:form>
 </apex:page>
